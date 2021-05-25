@@ -1,0 +1,5 @@
+flask
+flask_restful
+flask_jwt_extended
+flask_ngrok
+ortools==9.0.9048

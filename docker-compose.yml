@@ -1,0 +1,22 @@
+version: "3"
+services:
+  flask:
+    build: 
+      ./
+    container_name: flask
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+      - "443:443"
+    environment:
+      APP_ENV: "prod"
+      APP_DEBUG: "True"
+      #APP_PORT: 5000
+    volumes:
+      - ./app:/var/www/app/
+    #command: python /var/www/app/app.py runserver
+    #command: uwsgi --http :5000 --wsgi-file /var/www/app/wsgi.py
+    #uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
+    command: uwsgi --http :5000 ./uwsgi.ini
+networks:
+  default:
